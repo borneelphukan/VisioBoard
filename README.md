@@ -22,3 +22,4 @@ Follow these steps to get started with the ML Dashboard:
    ```bash
    git clone https://github.com/your-username/ml-dashboard.git
    cd ml-dashboard
+   python app.py
