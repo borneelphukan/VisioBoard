@@ -40,7 +40,7 @@
 
     <div class="container">
 
-        <div class="row p-5 ">
+        <div class="row p-5">
             <!-- Model Dropdown Column -->
             <div class="col-md-4">
                 <div class="form-group">
@@ -58,9 +58,9 @@
                     <label for="datasetDropdown">Dataset:</label>
                     <select class="form-control" id="datasetDropdown" disabled>
                         <option selected>Select Dataset</option>
-                        <option>Dataset 1</option>
-                        <option>Dataset 2</option>
-                        <option>Dataset 3</option>
+                        <option value="figure8">Figure 8</option>
+                        <option value="lorenz">Lorenz</option>
+                        <option value="rossler">Rossler</option>
                     </select>
                 </div>
             </div>
@@ -71,11 +71,12 @@
                     <label for="optimizerDropdown">Optimizer:</label>
                     <select class="form-control" id="optimizerDropdown" disabled>
                         <option selected>Select Optimizer</option>
-                        <option>Optimizer 1</option>
+                        <option value="dopamine">Dopamine</option>
                     </select>
                 </div>
             </div>
 
+            <div class="row">
             <div class="col-md-6">
                 <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid">
                 <figcaption class="text-center p-2">2D Loss Space</figcaption>
@@ -85,6 +86,7 @@
             <div class="col-md-6">
                 <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid">
                 <figcaption class="text-center p-2">3D Loss Space</figcaption>
+            </div>
             </div>
         </div>
     </div>
