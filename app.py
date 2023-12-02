@@ -1,6 +1,7 @@
 from flask import Flask,request, url_for, redirect, render_template, jsonify
 from dopamine.datasets.figure8 import Figure8Dataset, load_figure8_dataset
 from dopamine.datasets.lorenz import LorenzAttractorDataset, load_lorenz_attractor_dataset
+from dopamine.datasets.rossler import RosslerAttractorDataset, load_rossler_attractor_dataset
 from dopamine.optimizer import Dopamine
 from dopamine.models.rnn import RNNModel
 
@@ -70,6 +71,16 @@ def load_dataset():
 
             # Dummy response, you can return any information you want
             return jsonify({"message": "Lorenz Dataset loaded successfully."})
+        
+        elif dataset_type == "rossler":
+            # Load the RosslerAttractorDataset
+            sequence_length = 499
+            target_length = 1
+            data = load_rossler_attractor_dataset(data_length=500)
+            rossler_dataset = RosslerAttractorDataset(data, sequence_length, target_length)
+
+            # Dummy response, you can return any information you want
+            return jsonify({"message": "Rossler Dataset loaded successfully."})
 
         else:
             return jsonify({"error": "Invalid dataset type."})
