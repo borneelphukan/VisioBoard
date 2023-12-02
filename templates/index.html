@@ -146,27 +146,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#optimizerDropdown").change(function () {
-                var selectedOptimizer = $(this).val();
-                if (selectedOptimizer === "dopamine") {
-                    // Trigger an AJAX request to your Flask endpoint
-                    $.ajax({
-                        type: "POST",
-                        url: "/optimize",
-                        success: function (response) {
-                            // Handle the response from the server if needed
-                            console.log("Hol: ", response);
-                        },
-                        error: function (error) {
-                            console.error("Nohol: ", error);
-                        },
-                    });
-                }
-            });
-        });
-    </script>
+
+    <script src="../static/js/select_dataset.js"></script>
+    <script src="../static/js/load_models.js"></script>
+    <script src="../static/js/select_optimizers.js"></script>
 
     <script>
         // Wrap the script in $(document).ready() to ensure it runs after the DOM is ready
