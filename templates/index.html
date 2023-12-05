@@ -171,29 +171,30 @@
 
     <script>
         function loadDatasetImage() {
-                // Check if a dataset is selected
-                var dropdown = document.getElementById("datasetDropdown");
-                var selectedDataset = dropdown.options[dropdown.selectedIndex].value;
+            // Check if a dataset is selected
+            var dropdown = document.getElementById("datasetDropdown");
+            var selectedDataset = dropdown.options[dropdown.selectedIndex].value;
+  
 
-                if (selectedDataset !== "Select Dataset") {
-                    // Make an AJAX request to the Flask route based on the selected dataset
-                    fetch(`/load_${selectedDataset}_image`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if ('error' in data) {
-                                console.error('Error:', data.error);
-                                // Reset the image to the placeholder on error
-                                document.getElementById('datasetImage').src = "../static/images/placeholder.webp";
-                            } else {
-                                // Update the 'src' attribute of the image tag
-                                document.getElementById('datasetImage').src = data.image_path;
-                            }
-                        })
-                        .catch(error => console.error('Error:', error));
-                } else {
-                    // Reset the image to the placeholder when no dataset is selected
-                    document.getElementById('datasetImage').src = "../static/images/placeholder.webp";
-                }
+            if (selectedDataset !== "Select Dataset") {
+                // Make an AJAX request to the Flask route based on the selected dataset
+                fetch(`/load_${selectedDataset}_image`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if ('error' in data) {
+                            console.error('Error:', data.error);
+                            // Reset the image to the placeholder on error
+                            document.getElementById('datasetImage').src = "../static/images/placeholder.webp";
+                        } else {
+                            // Update the 'src' attribute of the image tag
+                             document.getElementById('datasetImage').src = data.image_path;
+                        }
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                // Reset the image to the placeholder when no dataset is selected
+                document.getElementById('datasetImage').src = "../static/images/placeholder.webp";
+            }
             }
     </script>
 </body>

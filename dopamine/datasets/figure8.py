@@ -70,14 +70,7 @@ if __name__ == '__main__':
         plt.title('Single Sequence and Target')
         plt.legend()
         plt.grid()
-
-        image_filename = 'figure8_plot.png'
-        image_path = os.path.join('static', 'images', image_filename)
-        plt.savefig(image_path)
-        plt.close()  # Close the plot to prevent it from being displayed in a separate window
-
-        # Print the path to the generated image (this will be returned to the Flask app)
-        print(image_path)
+        plt.savefig(os.path.join('static', 'images', 'figure8_plot.png'))
 
         # Break after processing the batch for demonstration
         break
