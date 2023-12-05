@@ -4,7 +4,9 @@ from dopamine.datasets.lorenz import LorenzAttractorDataset, load_lorenz_attract
 from dopamine.datasets.rossler import RosslerAttractorDataset, load_rossler_attractor_dataset
 from dopamine.optimizer import Dopamine
 from dopamine.models.rnn import RNNModel
-
+import subprocess
+import os
+import uuid
 
 import numpy as np
 
@@ -43,6 +45,33 @@ def rnn_model():
     except Exception as e:
         return jsonify({"error": str(e)})
     
+@app.route('/load_figure8_image')
+def load_figure8_image():
+    return load_dataset_image('figure8.py')
+
+@app.route('/load_lorenz_image')
+def load_lorenz_image():
+    return load_dataset_image('lorenz.py')
+
+@app.route('/load_rossler_image')
+def load_rossler_image():
+    return load_dataset_image('rossler.py')
+    
+def load_dataset_image(script_filename):
+    try:
+        # Generate a unique filename for the image
+        unique_filename = str(uuid.uuid4()) + '.png'
+        image_path = os.path.join('static', 'images', unique_filename)
+
+        # Run the specified script with the unique filename as an argument
+        subprocess.run(['python', f'dopamine/datasets/{script_filename}', unique_filename])
+
+        # Return the path to the generated image
+        return jsonify({'image_path': image_path})
+    except Exception as e:
+        print(f"Error generating image: {str(e)}")
+        return jsonify({'error': f'Failed to generate image for {script_filename}'})
+
 @app.route("/load_dataset", methods=["POST"])
 def load_dataset():
     try:
