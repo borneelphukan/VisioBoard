@@ -47,7 +47,8 @@ def rnn_model():
     
 @app.route('/load_figure8_image')
 def load_figure8_image():
-    return load_dataset_image('figure8.py')
+    image_path = load_dataset_image('figure8.py')
+    return jsonify({'image_path': image_path})
 
 @app.route('/load_lorenz_image')
 def load_lorenz_image():
@@ -63,14 +64,15 @@ def load_dataset_image(script_filename):
         unique_filename = str(uuid.uuid4()) + '.png'
         image_path = os.path.join('static', 'images', unique_filename)
 
-        # Run the specified script with the unique filename as an argument
-        subprocess.run(['python', f'dopamine/datasets/{script_filename}', unique_filename])
+        # Run the specified script to generate the image
+        subprocess.run(['python', f'dopamine/datasets/{script_filename}', image_path])
 
-        # Return the path to the generated image
-        return jsonify({'image_path': image_path})
+        # Return the path to the generated image without jsonify
+        return image_path
     except Exception as e:
         print(f"Error generating image: {str(e)}")
         return jsonify({'error': f'Failed to generate image for {script_filename}'})
+
 
 @app.route("/load_dataset", methods=["POST"])
 def load_dataset():

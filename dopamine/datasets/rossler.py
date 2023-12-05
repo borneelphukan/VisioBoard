@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import os
 
 
 # Define the RosslerAttractorDataset class
@@ -110,7 +111,13 @@ if __name__ == "__main__":
         ax.set_title("Rössler Attractor 3D Sequence and Target")
         ax.legend()
 
-        plt.show()
+        image_filename = 'rossler_plot.png'
+        image_path = os.path.join('static', 'images', image_filename)
+        plt.savefig(image_path)
+        plt.close()  # Close the plot to prevent it from being displayed in a separate window
+
+        # Print the path to the generated image (this will be returned to the Flask app)
+        print(image_path)
 
         # Break after processing the batch for demonstration
         break

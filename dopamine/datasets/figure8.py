@@ -3,6 +3,7 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 # Define the Figure8Dataset class
 class Figure8Dataset(Dataset):
@@ -43,15 +44,14 @@ def load_figure8_dataset(data_length=500):
     return df.values
 
 if __name__ == '__main__':
-
     # Create the dataset
-    sequence_length = 50  # Change this to 10 for a sequence of length 10
+    sequence_length = 50
     target_length = 1
     data = load_figure8_dataset()
     dataset = Figure8Dataset(data, sequence_length, target_length)
 
     # Create a DataLoader to load a batch of data
-    batch_size = 1  # Set batch size to 1 to visualize a single sequence
+    batch_size = 1
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     # Get a batch of data
@@ -64,13 +64,20 @@ if __name__ == '__main__':
         plt.figure(figsize=(8, 6))
         plt.scatter(sequence_batch[0, :, 0], sequence_batch[0, :, 1], label='Sequence', marker='o', s=50)
         plt.scatter(target_batch[0, :, 0], target_batch[0, :, 1], label='Target', marker='x', color='red', s=100)
-        
+
         plt.xlabel('Feature x')
         plt.ylabel('Feature y')
         plt.title('Single Sequence and Target')
         plt.legend()
         plt.grid()
-        plt.show()
+
+        image_filename = 'figure8_plot.png'
+        image_path = os.path.join('static', 'images', image_filename)
+        plt.savefig(image_path)
+        plt.close()  # Close the plot to prevent it from being displayed in a separate window
+
+        # Print the path to the generated image (this will be returned to the Flask app)
+        print(image_path)
 
         # Break after processing the batch for demonstration
         break
