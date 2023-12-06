@@ -118,6 +118,20 @@ def load_dataset():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+@app.route('/train', methods=['POST'])
+def train_model():
+    if request.method == 'POST':
+        # Get the current directory
+        current_directory = os.getcwd()
+        
+        # Set the path to the train_wp.py script
+        train_wp_path = os.path.join(current_directory, 'dopamine', 'train_wp.py')
 
+        # Execute the train_wp.py script using subprocess
+        try:
+            subprocess.run(['python', train_wp_path], check=True, cwd=current_directory)
+            return "Training completed successfully!"
+        except subprocess.CalledProcessError as e:
+            return f"Error during training: {e}"
 
 app.run(debug=True)
