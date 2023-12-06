@@ -110,6 +110,7 @@ if __name__ == "__main__":
         ax.set_zlabel("Z")
         ax.set_title("Rössler Attractor 3D Sequence and Target")
         ax.legend()
-        plt.savefig(os.path.join('static', 'images', 'rossler_plot.png'))
+        plt.savefig(os.path.join('static', 'images', 'dataset.png'))
+        plt.show()
 
         break

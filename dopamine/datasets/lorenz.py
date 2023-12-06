@@ -107,7 +107,7 @@ if __name__ == "__main__":
         ax.set_zlabel("Z")
         ax.set_title("Lorenz Attractor 3D Sequence and Target")
         ax.legend()
-        plt.savefig(os.path.join('static', 'images', 'lorenz_plot.png'))
-
+        plt.savefig(os.path.join('static', 'images', 'dataset.png'))
+        plt.show()
         # Break after processing the batch for demonstration
         break
