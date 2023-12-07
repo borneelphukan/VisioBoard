@@ -7,6 +7,7 @@ from dopamine.models.rnn import RNNModel
 import subprocess
 import os
 import uuid
+import shutil
 
 import numpy as np
 
@@ -58,6 +59,7 @@ def load_lorenz_image():
 def load_rossler_image():
     return load_dataset_image('rossler.py')
     
+python_command = shutil.which("python") or shutil.which("python3")
 def load_dataset_image(script_filename):
     try:
         # Generate a unique filename for the image
@@ -65,7 +67,7 @@ def load_dataset_image(script_filename):
         image_path = os.path.join('static', 'images', unique_filename)
 
         # Run the specified script to generate the image
-        subprocess.run(['python', f'dopamine/datasets/{script_filename}', image_path])
+        subprocess.run([python_command, f'dopamine/datasets/{script_filename}', image_path])
 
         # Return the path to the generated image without jsonify
         return image_path
