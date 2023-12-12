@@ -11,10 +11,9 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 <!-- Your logo/image goes here -->
                 <img src="../static/images/logo.jpeg" alt="Logo" height="20" width="50">
             </a>
@@ -29,39 +28,17 @@
                     <li class="nav-item active">
                         <a class="nav-link " href="#">Dashboard</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link " href="#">About</a>
-                    </li>
+                    
                     <!-- Add more navigation items as needed -->
                 </ul>
             </div>
         </div>
     </nav>
 
-<div class="">
-    <div class="row p-5">
-        <!-- Left Content Column -->
-        <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid">
-                    <figcaption class="text-center p-2">2D Loss Space</figcaption>
-                </div>
-            
-                <!-- Image Field 2 -->
-                <div class="col-md-6">
-                    <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid">
-                    <figcaption class="text-center p-2">3D Loss Space</figcaption>
-                </div>
-            </div>
-            <form action="/train" method="post">
-                <button type="submit">Train Model</button>
-            </form>
-           
-        </div>
+    <div class="row d-flex justify-content-between">
 
-        <!-- Right Panel Column -->
-        <div class="col-md-4 bg-light p-3">
+        <!-- Left Column -->
+        <div class="col-md-3 bg-light px-5">
             <div class="form-group">
                 <label for="modelDropdown">Model:</label>
                 <select class="form-control" id="modelDropdown">
@@ -86,6 +63,42 @@
                 </select>
             </div>
         </div>
+
+        <!-- Center Column -->
+        <div class="col-md-5 py-4">
+                    <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid" height="500" width="750">
+                    <figcaption class="text-center p-2">2D Loss Space</figcaption>
+
+                    <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid" height="500" width="750">
+                    <figcaption class="text-center p-2">3D Loss Space</figcaption>
+
+
+                <div class="col-md-6">
+            <form action="/train" method="post">
+                <button type="submit">Train Model</button>
+            </form>
+                </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-3 bg-light px-5">
+            <div class="form-group">
+                <label for="">Data Length</label>
+                <br>
+                <input type="text" id="data_length" name="data_length">
+            </div>
+            <div class="form-group">
+                <label for="">Batch Size:</label>
+                <br>
+                <input type="text" id="batch_size" name="batch_size">
+            </div>
+            <div class="form-group">
+                <label for="">Epochs:</label>
+                <br>
+                <input type="text" id="epochs" name="epochs">
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -103,7 +116,6 @@
     <script>
         // Wrap the script in $(document).ready() to ensure it runs after the DOM is ready
         $(document).ready(function () {
-            document.getElementById('currentYear').innerText = new Date().getFullYear();
 
             // Handle Model Dropdown Change Event
             $('#modelDropdown').on('change', function () {
@@ -124,7 +136,6 @@
             var dropdown = document.getElementById("datasetDropdown");
             var selectedDataset = dropdown.options[dropdown.selectedIndex].value;
   
-
             if (selectedDataset !== "Select Dataset") {
                 // Make an AJAX request to the Flask route based on the selected dataset
                 fetch(`/load_${selectedDataset}_image`)
