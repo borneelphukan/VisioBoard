@@ -136,10 +136,4 @@ def train_model():
         except subprocess.CalledProcessError as e:
             return f"Error during training: {e}"
         
-@app.route('/form')
-def form():
-    # Call your function with the desired parameter values
-    parameters = train_rossler_rnn()  # Update this line with actual parameter values
-    return render_template('index.html', **parameters)
-
 app.run(debug=True)

@@ -74,7 +74,7 @@ def train_figure8_rnn(
     tensorboard_name="fig8_wp"
 ):
     os.makedirs(results_dir, exist_ok=True)
-    # Hyperparameters
+    # Hyperparameters - figure8
     input_size = 2
     output_size = 2
 
@@ -175,7 +175,7 @@ def train_rossler_rnn(
 ):
     os.makedirs(results_dir, exist_ok=True)
 
-    # Hyperparameters
+    # Hyperparameters - rossler
     input_size = 3
     output_size = 3
 
@@ -306,7 +306,7 @@ def train_lorenz_rnn(
 ):
     os.makedirs(results_dir, exist_ok=True)
 
-    # Hyperparameters
+    # Hyperparameters - lorenz
     input_size = 3
     output_size = 3
 
