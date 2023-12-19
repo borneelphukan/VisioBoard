@@ -81,21 +81,19 @@
 
         <!-- Right Column -->
         <div class="col-md-3 bg-light px-5">
-            <div class="form-group">
-                <label for="">Data Length</label>
-                <br>
-                <input type="text" id="data_length" name="data_length">
-            </div>
-            <div class="form-group">
-                <label for="">Batch Size:</label>
-                <br>
-                <input type="text" id="batch_size" name="batch_size">
-            </div>
-            <div class="form-group">
-                <label for="">Epochs:</label>
-                <br>
-                <input type="text" id="epochs" name="epochs">
-            </div>
+            <input type="number" placeholder="Hidden Dimension" id="hidden_dim" name="hidden_dim" class="mb-2"
+                value="{{ hidden_dim }}">
+            <!-- Repeat for other input fields with respective values -->
+            <input type="number" placeholder="Data Length" id="data_length" name="data_length" class="mb-2"
+                value="{{ data_length }}">
+            <input type="number" placeholder="Batch Size" id="batch_size" name="batch_size" class="mb-2" value="{{ batch_size }}">
+            <input type="number" placeholder="Sequence Length" id="sequence_length" name="sequence_length" class="mb-2"
+                value="{{ sequence_length }}">
+            <input type="number" placeholder="Target Length" id="target_length" name="target_length" class="mb-2"
+                value="{{ target_length }}">
+            <input type="number" placeholder="Epochs" id="epochs" name="epochs" class="mb-2" value="{{ num_epochs }}">
+            <input type="text" placeholder="Tensorboard Name" id="tensorboard_name" name="tensorboard_name" class="mb-2"
+                value="{{ tensorboard_name }}">
         </div>
 
     </div>

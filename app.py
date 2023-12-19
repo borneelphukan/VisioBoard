@@ -131,9 +131,15 @@ def train_model():
 
         # Execute the train_wp.py script using subprocess
         try:
-            subprocess.run(['python', train_wp_path], check=True, cwd=current_directory)
+            subprocess.run([python_command, train_wp_path], check=True, cwd=current_directory)
             return "Training completed successfully!"
         except subprocess.CalledProcessError as e:
             return f"Error during training: {e}"
+        
+@app.route('/form')
+def form():
+    # Call your function with the desired parameter values
+    parameters = train_rossler_rnn()  # Update this line with actual parameter values
+    return render_template('index.html', **parameters)
 
 app.run(debug=True)
