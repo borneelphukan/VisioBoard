@@ -443,8 +443,10 @@ def train_lorenz_rnn(
     plt.legend(frameon=False)
     plt.title("WP")
     plt.tight_layout()
+
     # Save the figure
     fig1.savefig(results_dir + "lorenz_rnn_wp_3d.png")
+    fig1.show()
     
     # Plot Predictions in 2D
     # Create a time array for the x-axis
@@ -462,6 +464,7 @@ def train_lorenz_rnn(
     
     # Save the figure
     fig2.savefig(results_dir + "lorenz_rnn_wp_1d.png")
+    fig2.show()
     
 if __name__ == "__main__":
 
@@ -479,7 +482,7 @@ if __name__ == "__main__":
             batch_size=5000,
             sequence_length=32,
             target_length=1,
-            num_epochs=2000,
+            num_epochs=1,
             lr=1e-3,
             noise_stddev=3e-4,
             lambda_reg=1e-8,

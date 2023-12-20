@@ -66,17 +66,38 @@
 
         <!-- Center Column -->
         <div class="col-md-5 py-4">
-                    <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid" height="300" width="550">
-                    <figcaption class="text-center p-2">2D Loss Space</figcaption>
+                    
+                    <div id="imageContainer">
+                        <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid" height="300" width="550">
+                        <figcaption class="text-center mt-2">Dataset Image</figcaption>
+                    </div>
+                    <button onclick="fetchImage()" class="my-2">Fetch Plot</button>
+
+                    <script>
+                        function fetchImage() {
+                            fetch('/get_image')
+                                .then(response => response.blob())
+                                .then(data => {
+                                    const imageUrl = URL.createObjectURL(data);
+                                    document.getElementById('imageContainer').innerHTML = `<img src="${imageUrl}" height="400" width="550" alt="Fetched Image">`;
+                                });
+                        }
+                    </script>
 
                     <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid" height="300" width="550">
-                    <figcaption class="text-center p-2">3D Loss Space</figcaption>
+                    <figcaption class="text-center">3D Loss Space</figcaption>
 
                 <div class="col-md-6">
             <form action="/train" method="post">
                 <button type="submit">Train Model</button>
             </form>
                 </div>
+                <div id="console"></div>
+                
+                <!-- Display result message -->
+                {% if result_message %}
+                <p>{{ result_message }}</p>
+                {% endif %}
         </div>
 
         <!-- Right Column -->
@@ -154,6 +175,7 @@
             }
             }
     </script>
+
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-from flask import Flask,request, url_for, redirect, render_template, jsonify
+from flask import Flask,request, url_for, redirect, render_template, jsonify, send_file
 from dopamine.datasets.figure8 import Figure8Dataset, load_figure8_dataset
 from dopamine.datasets.lorenz import LorenzAttractorDataset, load_lorenz_attractor_dataset
 from dopamine.datasets.rossler import RosslerAttractorDataset, load_rossler_attractor_dataset
@@ -45,6 +45,11 @@ def rnn_model():
             return jsonify({"error": "Invalid model type."})
     except Exception as e:
         return jsonify({"error": str(e)})
+    
+@app.route('/get_image')
+def get_image():
+    image_path = 'static/images/dataset.png'
+    return send_file(image_path, mimetype='image/png')
     
 @app.route('/load_figure8_image')
 def load_figure8_image():
@@ -132,8 +137,13 @@ def train_model():
         # Execute the train_wp.py script using subprocess
         try:
             subprocess.run([python_command, train_wp_path], check=True, cwd=current_directory)
-            return "Training completed successfully!"
+            result_message = "Training completed successfully!"
         except subprocess.CalledProcessError as e:
-            return f"Error during training: {e}"
-        
+            result_message = f"Error during training: {e}"
+
+        return render_template('index.html', result_message=result_message)
+
+
+
+
 app.run(debug=True)

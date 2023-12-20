@@ -70,7 +70,6 @@ if __name__ == '__main__':
         plt.title('Single Sequence and Target')
         plt.legend()
         plt.grid()
-        plt.savefig(os.path.join('static', 'images/dataset', 'figure8.png'))
-        plt.show()
+        plt.savefig(os.path.join('static', 'images', 'dataset.png'))
         # Break after processing the batch for demonstration
         break
