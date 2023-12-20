@@ -74,7 +74,7 @@ def train_figure8_rnn(
     tensorboard_name="fig8_wp"
 ):
     os.makedirs(results_dir, exist_ok=True)
-    # Hyperparameters
+    # Hyperparameters - figure8
     input_size = 2
     output_size = 2
 
@@ -175,7 +175,7 @@ def train_rossler_rnn(
 ):
     os.makedirs(results_dir, exist_ok=True)
 
-    # Hyperparameters
+    # Hyperparameters - rossler
     input_size = 3
     output_size = 3
 
@@ -301,12 +301,12 @@ def train_lorenz_rnn(
     sr=1.0,
     beta_s=0.9,
     beta_lr=0.999,
-    results_dir=None,
+    results_dir=None, 
     tensorboard_name = None
 ):
     os.makedirs(results_dir, exist_ok=True)
 
-    # Hyperparameters
+    # Hyperparameters - lorenz
     input_size = 3
     output_size = 3
 
@@ -472,49 +472,6 @@ if __name__ == "__main__":
     torch.set_num_threads(4)
 
     torch.cuda.empty_cache() 
-
-    ################################### FIGURE 8 DATASET #################################################
-    # train_figure8_rnn(
-    #     hidden_dim=64,
-    #     data_length=5000,
-    #     batch_size=5000,
-    #     sequence_length=1,
-    #     target_length=1,
-    #     num_epochs=100,
-    #     lr=1e-3,
-    #     lambda_reg=1e-8,
-    #     device=device,
-    #     shuffle=False,
-    #     s_init=0.1,
-    #     beta_s=0.99,
-    #     beta_lr=0.999,
-    #     results_dir="results/rnn/wp/fig8",
-    #     tensorboard_name="fig8_wp"
-    # )
-    # print("**** End of training Fig 8 ****")
-    
-    ################################### ROSSLER DATASET #################################################
-    # train_rossler_rnn(
-    #     hidden_dim=512,
-    #     data_length=50000,
-    #     batch_size=50000,
-    #     sequence_length=5,
-    #     target_length=1,
-    #     num_epochs=500,
-    #     lr=1e-3,
-    #     noise_stddev=1e-3,
-    #     lambda_reg=1e-8,
-    #     device=device,
-    #     shuffle=False,
-    #     s_init=1e-2,
-    #     sr = 1.0,
-    #     beta_s=0.99,
-    #     beta_lr=0.999,
-    #     results_dir="results/rnn/wp/rossler_s_1e2_sq_5_sr_1.0_hd_512_ns_1e3_lr_1e3_bs_50k_b_1storder",
-    #     tensorboard_name = "rossler_wp_s_1e2_sq_5_sr_1.0_hd_512_ns_1e3_lr_1e3_bs_50k_b_1storder",
-    # )
-    # print("**** End of training Rossler ****")
-    ################################### LORENZ DATASET #################################################
     
     train_lorenz_rnn(
             hidden_dim=512,
@@ -537,46 +494,4 @@ if __name__ == "__main__":
         )
     print("**** End of training Lorenz ****")
 
-    ################################### LORENZ DATASET: GRID SEARCH [LR,BETA_S, BETA_LR] #################################
-
-    # # Define hyperparameter values to search
-    # learning_rates = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5]
-    # beta_s_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
-    # beta_lr_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
-    
-    # # Loop through the hyperparameter combinations
-    # for lr in learning_rates:
-    #     for beta_s in beta_s_values:
-    #         for beta_lr in beta_lr_values:
-    #             try:
-                    
-    #                 # Define the results directory and tensorboard name based on hyperparameters
-    #                 results_dir = f"results/rnn/wp/grid_search/lorenz_sq_32_hd_512_ns_3e4_lr_{lr}_bs_5k_b_e_3k_std_beta_s_{beta_s}_beta_lr_{beta_lr}"
-    #                 tensorboard_name = f"grid_search_lorenz_sq_32_hd_512_lr_{lr}_beta_s_{beta_s}_beta_lr_{beta_lr}"
-        
-    #                 # Call your training function with the current set of hyperparameters
-    #                 train_lorenz_rnn(
-    #                     hidden_dim=512,
-    #                     data_length=5000,
-    #                     batch_size=5000,
-    #                     sequence_length=32,
-    #                     target_length=1,
-    #                     num_epochs=500,
-    #                     lr=lr,
-    #                     noise_stddev=3e-4,
-    #                     lambda_reg=1e-8,
-    #                     device=device,
-    #                     shuffle=False,
-    #                     s_init=25e-3,
-    #                     sr=1.1,
-    #                     beta_s=beta_s,
-    #                     beta_lr=beta_lr,
-    #                     results_dir=results_dir,
-    #                     tensorboard_name=tensorboard_name
-    #                 )
-    #             except:
-    #                 pass
-
-####################################################################################################
-                    
                 

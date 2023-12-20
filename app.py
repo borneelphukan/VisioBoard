@@ -9,6 +9,8 @@ import os
 import uuid
 import shutil
 
+import numpy as np
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -58,7 +60,6 @@ def load_rossler_image():
     return load_dataset_image('rossler.py')
     
 python_command = shutil.which("python") or shutil.which("python3")
-
 def load_dataset_image(script_filename):
     try:
         # Generate a unique filename for the image
@@ -66,8 +67,7 @@ def load_dataset_image(script_filename):
         image_path = os.path.join('static', 'images', unique_filename)
 
         # Run the specified script to generate the image
-        if python_command:
-            subprocess.run([python_command, f'dopamine/datasets/{script_filename}', image_path])
+        subprocess.run([python_command, f'dopamine/datasets/{script_filename}', image_path])
 
         # Return the path to the generated image without jsonify
         return image_path
@@ -120,6 +120,20 @@ def load_dataset():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+@app.route('/train', methods=['POST'])
+def train_model():
+    if request.method == 'POST':
+        # Get the current directory
+        current_directory = os.getcwd()
+        
+        # Set the path to the train_wp.py script
+        train_wp_path = os.path.join(current_directory, 'dopamine', 'train_wp.py')
 
-
+        # Execute the train_wp.py script using subprocess
+        try:
+            subprocess.run([python_command, train_wp_path], check=True, cwd=current_directory)
+            return "Training completed successfully!"
+        except subprocess.CalledProcessError as e:
+            return f"Error during training: {e}"
+        
 app.run(debug=True)

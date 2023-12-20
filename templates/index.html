@@ -11,12 +11,11 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 <!-- Your logo/image goes here -->
-                <img src="../static/images/logo.jpeg" alt="Logo" height="70" width="150">
+                <img src="../static/images/logo.jpeg" alt="Logo" height="20" width="50">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -27,118 +26,78 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link " href="#">Dashboard</a>
+                        
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link " href="#">About</a>
-                    </li>
+                    
                     <!-- Add more navigation items as needed -->
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="row d-flex justify-content-between">
 
-        <div class="row p-5">
-            <!-- Model Dropdown Column -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="modelDropdown">Model:</label>
-                    <select class="form-control" id="modelDropdown">
-                        <option selected>Select Model</option>
-                        <option value="rnn_model">RNN Model</option>
-                    </select>
-                </div>
+        <!-- Left Column -->
+        <div class="col-md-3 bg-light px-5">
+            <div class="form-group">
+                <label for="modelDropdown">Model:</label>
+                <select class="form-control" id="modelDropdown">
+                    <option selected>Select Model</option>
+                    <option value="rnn_model">RNN Model</option>
+                </select>
             </div>
-
-            <!-- Dataset Dropdown Column -->
-            <div class="col-md-4">
-                <div class="form-group datasetDropdownContainer">
-                    <label for="datasetDropdown">Dataset:</label>
-                    <select class="form-control" id="datasetDropdown" onchange="loadDatasetImage()" disabled>
-                        <option selected>Select Dataset</option>
-                        <option id="figure8Option" value="figure8">Figure 8</option>
-                        <option id="lorenzOption" value="lorenz">Lorenz</option>
-                        <option id="rosslerOption" value="rossler">Rossler</option>
-                    </select>
-                </div>
+            <div class="form-group datasetDropdownContainer">
+                <label for="datasetDropdown">Dataset:</label>
+                <select class="form-control" id="datasetDropdown" onchange="loadDatasetImage()" disabled>
+                    <option selected>Select Dataset</option>
+                    <option id="figure8Option" value="figure8">Figure 8</option>
+                    <option id="lorenzOption" value="lorenz">Lorenz</option>
+                    <option id="rosslerOption" value="rossler">Rossler</option>
+                </select>
             </div>
-
-            <!-- Optimizer Dropdown Column -->
-            <div class="col-md-4">
-                <div class="form-group optimizerDropdownContainer">
-                    <label for="optimizerDropdown">Optimizer:</label>
-                    <select class="form-control" id="optimizerDropdown" disabled>
-                        <option selected>Select Optimizer</option>
-                        <option value="dopamine">Dopamine</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-            <div class="col-md-6">
-                <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid">
-                <figcaption class="text-center p-2">2D Loss Space</figcaption>
-            </div>
-            
-            <!-- Image Field 2 -->
-            <div class="col-md-6">
-                <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid">
-                <figcaption class="text-center p-2">3D Loss Space</figcaption>
-            </div>
+            <div class="form-group optimizerDropdownContainer">
+                <label for="optimizerDropdown">Optimizer:</label>
+                <select class="form-control" id="optimizerDropdown" disabled>
+                    <option selected>Select Optimizer</option>
+                    <option value="dopamine">Dopamine</option>
+                </select>
             </div>
         </div>
+
+        <!-- Center Column -->
+        <div class="col-md-5 py-4">
+                    <img src="../static/images/placeholder.webp" alt="Image 1" class="img-fluid" height="300" width="550">
+                    <figcaption class="text-center p-2">2D Loss Space</figcaption>
+
+                    <img src="../static/images/placeholder.webp" alt="Image 2" class="img-fluid" height="300" width="550">
+                    <figcaption class="text-center p-2">3D Loss Space</figcaption>
+
+                <div class="col-md-6">
+            <form action="/train" method="post">
+                <button type="submit">Train Model</button>
+            </form>
+                </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-3 bg-light px-5">
+            <input type="number" placeholder="Hidden Dimension" id="hidden_dim" name="hidden_dim" class="mb-2"
+                value="{{ hidden_dim }}">
+            <!-- Repeat for other input fields with respective values -->
+            <input type="number" placeholder="Data Length" id="data_length" name="data_length" class="mb-2"
+                value="{{ data_length }}">
+            <input type="number" placeholder="Batch Size" id="batch_size" name="batch_size" class="mb-2" value="{{ batch_size }}">
+            <input type="number" placeholder="Sequence Length" id="sequence_length" name="sequence_length" class="mb-2"
+                value="{{ sequence_length }}">
+            <input type="number" placeholder="Target Length" id="target_length" name="target_length" class="mb-2"
+                value="{{ target_length }}">
+            <input type="number" placeholder="Epochs" id="epochs" name="epochs" class="mb-2" value="{{ num_epochs }}">
+            <input type="text" placeholder="Tensorboard Name" id="tensorboard_name" name="tensorboard_name" class="mb-2"
+                value="{{ tensorboard_name }}">
+        </div>
+
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-light">
-        <div class="container">
-            <div class="row pt-3">
-                <!-- Left Column -->
-                <div class="col-md-4">
-                    <img src="../static/images/footer.png" alt="Logo" height="70" width="150">
-                    <ul class="list-unstyled mt-3">
-                        <li>Chemnitz University of Technology</li>
-                        <li>Faculty of Computer Science</li>
-                        <li>Professorship of Neurorobotics</li>
-                        <li>Straße der Nationen 62</li>
-                        <li>09111 Chemnitz</li>
-                    </ul>
-                   
-                </div>
-
-                <!-- Middle Column -->
-                <div class="col-md-4">
-                    <h3>Shortcuts</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="/">Dashboard</a></li>
-                        <li><a href="#">Camera</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <!-- Add more links as needed -->
-                    </ul>
-                </div>
-
-                <!-- Right Column -->
-                <div class="col-md-4">
-                    <h3>Social</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <!-- Add more social media links as needed -->
-                    </ul>
-                </div>
-            </div>
-
-            <!-- All Rights Reserved Statement -->
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <p>Borneel Bikash Phukan &copy; <span id="currentYear"></span> All Rights Reserved </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+</div>
 
     <!-- Bootstrap JS and Popper.js from CDN -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -154,7 +113,6 @@
     <script>
         // Wrap the script in $(document).ready() to ensure it runs after the DOM is ready
         $(document).ready(function () {
-            document.getElementById('currentYear').innerText = new Date().getFullYear();
 
             // Handle Model Dropdown Change Event
             $('#modelDropdown').on('change', function () {
@@ -175,7 +133,6 @@
             var dropdown = document.getElementById("datasetDropdown");
             var selectedDataset = dropdown.options[dropdown.selectedIndex].value;
   
-
             if (selectedDataset !== "Select Dataset") {
                 // Make an AJAX request to the Flask route based on the selected dataset
                 fetch(`/load_${selectedDataset}_image`)
