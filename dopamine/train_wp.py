@@ -142,9 +142,7 @@ def train_figure8_rnn(
         train_reward = np.mean(rewards)
 
         # Print epoch and loss
-        print(
-            f"Epoch: {epoch+1}/{num_epochs}, Loss: {train_loss:.4f}, Reward: {train_reward:.4f}"
-        )
+        print(f"Epoch: {epoch+1}/{num_epochs}, Loss: {train_loss:.4f}, Reward: {train_reward:.4f}")
 
         # Append loss and reward to the lists
         train_losses.append(train_loss)
@@ -285,25 +283,9 @@ def train_rossler_rnn(
 
 
 # Function to train the model on Lorenz Attractor dataset
-def train_lorenz_rnn(
-    hidden_dim=64,
-    data_length=50000,
-    batch_size=50000,
-    sequence_length=1,
-    target_length=1,
-    num_epochs=500,
-    lr=1e-3,
-    noise_stddev=1e-4,
-    lambda_reg=1e-8,
-    device=device,
-    shuffle=False,
-    s_init=0.01,
-    sr=1.0,
-    beta_s=0.9,
-    beta_lr=0.999,
-    results_dir=None, 
-    tensorboard_name = None
-):
+def train_lorenz_rnn(hidden_dim=64, data_length=50000, batch_size=50000, sequence_length=1, target_length=1, num_epochs=500, lr=1e-3, noise_stddev=1e-4, lambda_reg=1e-8, 
+                     device=device, shuffle=False, s_init=0.01, sr=1.0, beta_s=0.9, beta_lr=0.999, results_dir=None, tensorboard_name = None):
+    
     os.makedirs(results_dir, exist_ok=True)
 
     # Hyperparameters - lorenz
@@ -446,7 +428,6 @@ def train_lorenz_rnn(
 
     # Save the figure
     fig1.savefig(results_dir + "lorenz_rnn_wp_3d.png")
-    fig1.show()
     
     # Plot Predictions in 2D
     # Create a time array for the x-axis
@@ -464,7 +445,6 @@ def train_lorenz_rnn(
     
     # Save the figure
     fig2.savefig(results_dir + "lorenz_rnn_wp_1d.png")
-    fig2.show()
     
 if __name__ == "__main__":
 
@@ -473,28 +453,11 @@ if __name__ == "__main__":
     np.random.seed(0)
 
     torch.set_num_threads(4)
-
     torch.cuda.empty_cache() 
     
-    train_lorenz_rnn(
-            hidden_dim=512,
-            data_length=5000,
-            batch_size=5000,
-            sequence_length=32,
-            target_length=1,
-            num_epochs=1,
-            lr=1e-3,
-            noise_stddev=3e-4,
-            lambda_reg=1e-8,
-            device=device,
-            shuffle=False,
-            s_init=25e-3,
-            sr = 1.1,
-            beta_s=0.99,
-            beta_lr=0.4,
-            results_dir="results/rnn/wp_new/lorenz_WP",
-            tensorboard_name = "lorenz_WP",
-        )
+    train_lorenz_rnn(hidden_dim=512, data_length=5000, batch_size=5000, sequence_length=32, target_length=1, num_epochs=5, lr=1e-3, noise_stddev=3e-4, lambda_reg=1e-8,
+            device=device, shuffle=False, s_init=25e-3, sr = 1.1, beta_s=0.99, beta_lr=0.4, results_dir="results/rnn/wp_new/lorenz_WP", tensorboard_name = "lorenz_WP")
+    
     print("**** End of training Lorenz ****")
 
                 
