@@ -2,16 +2,17 @@ from flask import Flask,request, url_for, redirect, render_template, jsonify, se
 from dopamine.datasets.figure8 import Figure8Dataset, load_figure8_dataset
 from dopamine.datasets.lorenz import LorenzAttractorDataset, load_lorenz_attractor_dataset
 from dopamine.datasets.rossler import RosslerAttractorDataset, load_rossler_attractor_dataset
+from dopamine.utils import load_dataset_image
 from dopamine.optimizer import Dopamine
 from dopamine.models.rnn import RNNModel
 import subprocess
 import os
-import uuid
 import shutil
-
 import numpy as np
 
 app = Flask(__name__)
+
+python_command = shutil.which("python") or shutil.which("python3")
 
 @app.route('/')
 def dashboard():
@@ -19,11 +20,7 @@ def dashboard():
 
 @app.route("/optimize", methods=["POST"])
 def optimize():
-    # Instantiate the Dopamine class and perform optimization
     dopamine_optimizer = Dopamine()
-    # Perform optimization steps here using the Dopamine instance
-
-    # Dummy response, you can return any information you want
     return jsonify({"message": "Optimization with Dopamine completed."})
 
 @app.route("/rnn_model", methods=["POST"])
@@ -32,53 +29,31 @@ def rnn_model():
         model_type = request.form.get("model_type")
 
         if model_type == "rnn_model":
-            # Dummy values for input_size, output_size, and hidden_dim
             input_size, output_size, hidden_dim = 10, 5, 20
-            
-            # Instantiate the RNNModel class
             rnn_model = RNNModel(input_size, output_size, hidden_dim)
-            # Perform any additional model loading steps if needed
-
-            # Dummy response, you can return any information you want
             return jsonify({"message": "RNN Model loaded successfully."})
         else:
             return jsonify({"error": "Invalid model type."})
     except Exception as e:
         return jsonify({"error": str(e)})
-    
+
 @app.route('/get_image')
 def get_image():
     image_path = 'static/images/dataset.png'
     return send_file(image_path, mimetype='image/png')
     
-@app.route('/load_figure8_image')
+@app.route('/get_image/load_figure8_image')
 def load_figure8_image():
     image_path = load_dataset_image('figure8.py')
     return jsonify({'image_path': image_path})
 
-@app.route('/load_lorenz_image')
+@app.route('/get_image/load_lorenz_image')
 def load_lorenz_image():
     return load_dataset_image('lorenz.py')
 
-@app.route('/load_rossler_image')
+@app.route('/get_image/load_rossler_image')
 def load_rossler_image():
     return load_dataset_image('rossler.py')
-    
-python_command = shutil.which("python") or shutil.which("python3")
-def load_dataset_image(script_filename):
-    try:
-        # Generate a unique filename for the image
-        unique_filename = str(uuid.uuid4()) + '.png'
-        image_path = os.path.join('static', 'images', unique_filename)
-
-        # Run the specified script to generate the image
-        subprocess.run([python_command, f'dopamine/datasets/{script_filename}', image_path])
-
-        # Return the path to the generated image without jsonify
-        return image_path
-    except Exception as e:
-        print(f"Error generating image: {str(e)}")
-        return jsonify({'error': f'Failed to generate image for {script_filename}'})
 
 
 @app.route("/load_dataset", methods=["POST"])
