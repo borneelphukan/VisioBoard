@@ -2,9 +2,8 @@ from optimizers.adam import CustomAdamOptimizer
 from datasets.load_mnist import load_mnist
 from models.cnn_1 import cnn_1
 from tensorflow.keras.datasets import mnist
-from tensorflow.keras.datasets import fashion_mnist
 from tensorflow.keras.utils import to_categorical
-
+import matplotlib.pyplot as plt
 import os
 
 def train_cnn_1():
@@ -31,7 +30,8 @@ def train_cnn_1():
     if not os.path.exists(weights_dir):
         os.makedirs(weights_dir)
     model.save_weights(os.path.join(weights_dir, 'cnn_1_weights.h5'))
+    print("Model trained and weights saved")
 
 if __name__ == "__main__":
-    load_mnist()  # Visualize the dataset before training
+    load_mnist()
     train_cnn_1()

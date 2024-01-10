@@ -7,10 +7,12 @@ from backend.datasets.load_mnist import load_mnist
 app = Flask(__name__)
 python_command = shutil.which("python") or shutil.which("python3")
 
+#loads the UI
 @app.route('/')
 def dashboard():
     return render_template("index.html")
 
+#loads model on selecting Model Dropdown
 @app.route('/load_model', methods=['POST'])
 def load_model():
     selected_model = request.form.get('selected_model')
@@ -23,30 +25,44 @@ def load_model():
     else:
         return jsonify({'error': 'Invalid model selected'})
 
+#loads datasets/load_mnist
 @app.route('/load_mnist', methods=['POST'])
 def load_mnist_data():
     try:
-        # Execute the function
         result = load_mnist()
         return {"status": "success", "message": "MNIST Dataset loaded successfully", "data": result}
-
     except Exception as e:
         return {"status": "error", "message": str(e)}
     
+#loads datasets/load_fashion_mnist
 @app.route('/load_fashion_mnist', methods=['POST'])
 def load_fashion_mnist_data():
     try:
-        # Execute the function
         result = load_fashion_mnist()
         return {"status": "success", "message": "Fashion MNIST Dataset loaded successfully", "data": result}
-
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
+#fetch dataset plot
 @app.route('/get_image')
 def get_image():
-    # Specify the path to your dataset.png
     image_path = 'static/images/dataset.png'
     return send_file(image_path, mimetype='image/png')
+
+@app.route('/train', methods=['POST'])
+def train_model():
+    try:
+        # Use subprocess to execute the train.py script
+        subprocess.run(['python', 'backend/train.py'], check=True)
+        
+        # Set the result message
+        result_message = "Model trained and saved as cnn_1_weights.h5"
+    except Exception as e:
+        # Handle exceptions if the training fails
+        result_message = f"Error during training: {str(e)}"
+
+    # Render your template with the result message
+    return render_template('index.html', result_message=result_message)
+
 
 app.run(debug=True)
