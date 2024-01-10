@@ -2,12 +2,12 @@
 $(document).ready(function () {
   $("#modelDropdown").change(function () {
     var selectedModel = $(this).val();
-    if (selectedModel === "rnn_model") {
+    if (selectedModel === "custom_cnn") {
       // Trigger an AJAX request to your Flask endpoint
       $.ajax({
         type: "POST",
-        url: "/rnn_model",
-        data: { model_type: "rnn_model" },
+        url: "/custom_cnn",
+        data: { model_type: "custom_cnn" },
         success: function (response) {
           // Handle the response from the server if needed
           console.log(response);

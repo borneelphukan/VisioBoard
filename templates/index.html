@@ -41,16 +41,14 @@
                 <label for="modelDropdown">Model:</label>
                 <select class="form-control" id="modelDropdown">
                     <option selected>Select Model</option>
-                    <option value="rnn_model">RNN Model</option>
+                    <option value="rnn_model">CNN Model</option>
                 </select>
             </div>
             <div class="form-group datasetDropdownContainer">
                 <label for="datasetDropdown">Dataset:</label>
                 <select class="form-control" id="datasetDropdown" onchange="loadDatasetImage()" disabled>
                     <option selected>Select Dataset</option>
-                    <option id="figure8Option" value="figure8">Figure 8</option>
-                    <option id="lorenzOption" value="lorenz">Lorenz</option>
-                    <option id="rosslerOption" value="rossler">Rossler</option>
+                    <option id="figure8Option" value="mnist">MNIST Dataset</option>
                 </select>
             </div>
             <div class="form-group optimizerDropdownContainer">

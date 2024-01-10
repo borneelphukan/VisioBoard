@@ -5,9 +5,9 @@ $(document).ready(function () {
 
     // Trigger an AJAX request to your Flask endpoint based on the selected dataset
     if (
-      selectedDataset === "figure8" ||
+      selectedDataset === "mnist" /*||
       selectedDataset === "lorenz" ||
-      selectedDataset === "rossler"
+      selectedDataset === "rossler"*/
     ) {
       $.ajax({
         type: "POST",
