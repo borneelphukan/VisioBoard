@@ -53,7 +53,7 @@ def get_image():
 def train_model():
     try:
         # Use subprocess to execute the train.py script
-        subprocess.run(['python', 'backend/train.py'], check=True)
+        subprocess.run([python_command, 'backend/train.py'], check=True)
         
         # Set the result message
         result_message = "Model trained and saved as cnn_1_weights.h5"
