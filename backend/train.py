@@ -1,5 +1,6 @@
 from optimizers.adam import CustomAdamOptimizer
 from datasets.load_mnist import load_mnist
+from datasets.load_fashion_mnist import load_fashion_mnist
 from models.cnn_1 import cnn_1
 from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
@@ -7,7 +8,7 @@ import os
 
 def train_cnn_1():
     # Load MNIST dataset
-    (x_train, y_train), (x_test, y_test) = load_mnist()
+    (x_train, y_train), (x_test, y_test) = load_fashion_mnist()
 
     # Preprocess the data
     x_train = x_train.reshape((x_train.shape[0], 28, 28, 1)).astype('float32') / 255
