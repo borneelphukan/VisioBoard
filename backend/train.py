@@ -32,5 +32,4 @@ def train_cnn_1():
     print("Model trained and weights saved")
 
 if __name__ == "__main__":
-    load_mnist()
     train_cnn_1()

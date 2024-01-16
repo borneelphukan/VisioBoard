@@ -64,5 +64,4 @@ def train_model():
     # Render your template with the result message
     return render_template('index.html', result_message=result_message)
 
-
 app.run(debug=True)
