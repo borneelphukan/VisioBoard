@@ -4,7 +4,7 @@ from tensorflow.keras.datasets import mnist
 
 def load_mnist():
     # Load MNIST dataset
-    (x_train, _), (_, _) = mnist.load_data()
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
     # Visualize the first 10 images
     fig, axes = plt.subplots(2, 5, figsize=(10, 5))
@@ -14,6 +14,7 @@ def load_mnist():
 
     # Save the visualization as dataset.png
     plt.savefig('static/images/dataset.png')
+    return (x_train, y_train), (x_test, y_test)
 
 if __name__ == "__main__":
     load_mnist()
