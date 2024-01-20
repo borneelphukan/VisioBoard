@@ -49,6 +49,12 @@ def get_image():
     image_path = 'static/images/dataset.png'
     return send_file(image_path, mimetype='image/png')
 
+#fetch training plot
+@app.route('/get_tplot')
+def get_training_image():
+    image_path = 'static/images/cnn_1.png'
+    return send_file(image_path, mimetype='image/png')
+
 @app.route('/train', methods=['POST'])
 def train_model():
     try:
