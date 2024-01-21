@@ -1,6 +1,7 @@
 # backend/test.py
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
+from visualize.visualize_cnn import test_accuracy, test_loss
 from models.cnn_1 import cnn_1
 
 def test_cnn_1():
@@ -24,6 +25,8 @@ def test_cnn_1():
     # Evaluate the model on the test set
     loss, accuracy = model.evaluate(x_test, y_test)
     print(f'Test Loss: {loss:.4f}, Test Accuracy: {accuracy:.4f}')
+    test_accuracy(accuracy)
+    test_loss(loss)
 
 if __name__ == "__main__":
     test_cnn_1()

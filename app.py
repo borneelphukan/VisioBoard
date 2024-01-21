@@ -49,10 +49,28 @@ def get_image():
     image_path = 'static/images/dataset.png'
     return send_file(image_path, mimetype='image/png')
 
-#fetch training plot
-@app.route('/get_tplot')
-def get_training_image():
-    image_path = 'static/images/cnn_1.png'
+# training & validation accuracy
+@app.route('/training_accuracy')
+def training_accuracy():
+    image_path = 'static/images/visualization/training_accuracy.png'
+    return send_file(image_path, mimetype='image/png')
+
+# training & validation loss
+@app.route('/training_loss')
+def training_loss():
+    image_path = 'static/images/visualization/training_loss.png'
+    return send_file(image_path, mimetype='image/png')
+
+# test & validation accuracy
+@app.route('/test_accuracy')
+def test_accuracy():
+    image_path = 'static/images/visualization/test_accuracy.png'
+    return send_file(image_path, mimetype='image/png')
+
+# test & validation loss
+@app.route('/test_loss')
+def test_loss():
+    image_path = 'static/images/visualization/test_loss.png'
     return send_file(image_path, mimetype='image/png')
 
 @app.route('/train', methods=['POST'])
@@ -66,6 +84,21 @@ def train_model():
     except Exception as e:
         # Handle exceptions if the training fails
         result_message = f"Error during training: {str(e)}"
+
+    # Render your template with the result message
+    return render_template('index.html', result_message=result_message)
+
+@app.route('/test', methods=['POST'])
+def test_model():
+    try:
+        # Use subprocess to execute the train.py script
+        subprocess.run([python_command, 'backend/test.py'], check=True)
+        
+        # Set the result message
+        result_message = "Model test completed"
+    except Exception as e:
+        # Handle exceptions if the training fails
+        result_message = f"Error during testing: {str(e)}"
 
     # Render your template with the result message
     return render_template('index.html', result_message=result_message)
