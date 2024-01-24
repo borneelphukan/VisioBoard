@@ -22,3 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Button Spinner
+document.addEventListener("DOMContentLoaded", function () {
+  // Show the spinner when the form is submitted
+  document.querySelector("form").addEventListener("submit", function () {
+    document.getElementById("loadingSpinner").style.display = "inline-block";
+  });
+
+  // Hide the spinner when the page is fully loaded
+  window.addEventListener("load", function () {
+    document.getElementById("loadingSpinner").style.display = "none";
+  });
+});
