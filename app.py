@@ -76,16 +76,11 @@ def test_loss():
 @app.route('/train', methods=['POST'])
 def train_model():
     try:
-        # Use subprocess to execute the train.py script
         subprocess.run([python_command, 'backend/train.py'], check=True)
-        
-        # Set the result message
-        result_message = "Model trained and saved as cnn_1_weights.h5"
+        result_message = "Model trained"
     except Exception as e:
-        # Handle exceptions if the training fails
         result_message = f"Error during training: {str(e)}"
 
-    # Render your template with the result message
     return render_template('index.html', result_message=result_message)
 
 @app.route('/test', methods=['POST'])
