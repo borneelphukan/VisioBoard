@@ -1,4 +1,4 @@
-# ML Dashboard
+# VisioBoard Dashboard
 
 Welcome to the ML Dashboard repository! This project focuses on the subject: "Interactive Visualization and Analysis of Machine Learning Algorithm Performance: A User Interface for Accurate Model Evaluation." It is a hobby project that aims to provide a user-friendly interface for evaluating machine learning models.
 
