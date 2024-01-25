@@ -7,7 +7,6 @@ from backend.datasets.load_mnist import load_mnist
 app = Flask(__name__)
 python_command = shutil.which("python") or shutil.which("python3")
 
-#loads the UI
 @app.route('/')
 def dashboard():
     return render_template("index.html")
@@ -73,6 +72,7 @@ def test_loss():
     image_path = 'static/images/visualization/test_loss.png'
     return send_file(image_path, mimetype='image/png')
 
+# train model
 @app.route('/train', methods=['POST'])
 def train_model():
     try:
