@@ -4,7 +4,7 @@ Welcome to the ML Dashboard repository! This project focuses on the subject: "In
 
 ## Overview
 
-The ML Dashboard is designed to provide a scalable user interface for visualizing and analyzing machine learning algorithms. The goal is to facilitate a comprehensive understanding of model performance through interactive features, making model evaluation more accurate and insightful.
+The VisioBoard Dashboard is designed to provide a scalable user interface for visualizing and analyzing machine learning algorithms. The goal is to facilitate a comprehensive understanding of model performance through interactive features, making model evaluation more accurate and insightful.
 
 ## Features
 
