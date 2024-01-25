@@ -1,6 +1,6 @@
 # ML Dashboard
 
-Welcome to the ML Dashboard repository! This project is part of my Master's Thesis, focusing on the subject: "Interactive Visualization and Analysis of Machine Learning Algorithm Performance: A User Interface for Accurate Model Evaluation."
+Welcome to the ML Dashboard repository! This project focuses on the subject: "Interactive Visualization and Analysis of Machine Learning Algorithm Performance: A User Interface for Accurate Model Evaluation." It is a hobby project that aims to provide a user-friendly interface for evaluating machine learning models.
 
 ## Overview
 
@@ -20,6 +20,7 @@ Follow these steps to get started with the ML Dashboard:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/ml-dashboard.git
+   git clone https://github.com/borneelphukan/ml-dashboard.git
    cd ml-dashboard
+   pip install -r requirements.txt
    python app.py
